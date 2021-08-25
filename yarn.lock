@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@apollo/client@latest":
+"@apollo/client@^3.4.9", "@apollo/client@latest":
   "integrity" "sha512-1AlYjRJ/ktDApEUEP2DqHI38tqSyhSlsF/Q3fFb/aCbLHQfcSZ1dCv7ZlC9UXRyDwQYc0w23gYJ7wZde6W8P4A=="
   "resolved" "https://registry.npmjs.org/@apollo/client/-/client-3.4.9.tgz"
   "version" "3.4.9"
