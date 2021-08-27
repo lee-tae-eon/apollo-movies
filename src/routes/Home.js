@@ -47,8 +47,19 @@ const Loading = styled.div`
   margin-top: 10px;
 `;
 
+const Movies = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(1fr, 250px));
+  gap: 25px;
+  width: 80%;
+  position: relative;
+  top: -50px;
+`;
+
 export default () => {
   const { loading, error, data } = useQuery(GET_MOIVES);
+  console.log(data);
   return (
     <Container>
       <Header>
@@ -56,9 +67,13 @@ export default () => {
         <Subtitle>Graph</Subtitle>
       </Header>
       {loading && <Loading>Loading...</Loading>}
-      {data &&
-        data.movies &&
-        data.movies.map((movie) => <Movie key={movie.id} id={movie.id} />)}
+      {!loading && data.movies && (
+        <Movies>
+          {data.movies.map((movie) => (
+            <Movie key={movie.id} id={movie.id} bg={movie.medium_cover_image} />
+          ))}
+        </Movies>
+      )}
     </Container>
   );
 };
