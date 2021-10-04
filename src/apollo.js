@@ -1,26 +1,25 @@
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/",
+  uri: "http://localhost:4040/",
   cache: new InMemoryCache(),
   resolvers: {
     Movie: {
       isLiked: () => false, // 디폴트로 false 값 지니도록.
     },
     Mutation: {
-      likeMovie: (_, { id }, { cache }) => {
+      toggleLikeMovie: (_, { id, isLiked }, { cache }) => {
+        const thisMovie = {
+          __typename: "Movie",
+          id: `${id}`,
+          isLiked: `${isLiked}`,
+        };
         cache.modify({
-          id: `Movie:${id}`,
+          id: cache.identify(thisMovie),
           fields: {
-            isLiked: (isLiked) => !isLiked,
-          },
-        });
-      },
-      unLikeMovie: (_, { id }, { cache }) => {
-        cache.modify({
-          id: `Movie:${id}`,
-          fields: {
-            isLiked: (isLiked) => !isLiked,
+            isLiked() {
+              return !isLiked;
+            },
           },
         });
       },

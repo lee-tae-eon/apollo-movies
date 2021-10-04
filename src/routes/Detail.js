@@ -7,6 +7,7 @@ import styled from "styled-components";
 const GET_MOIVES = gql`
   query getMovie($id: Int!) {
     movie(id: $id) {
+      id
       title
       language
       rating

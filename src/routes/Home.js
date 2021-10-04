@@ -60,7 +60,7 @@ const Movies = styled.div`
 
 export default () => {
   const { loading, error, data } = useQuery(GET_MOIVES);
-
+  console.log(data);
   return (
     <Container>
       <Header>
